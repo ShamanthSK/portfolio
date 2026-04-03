@@ -15,7 +15,7 @@ function HeroSection() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="flex min-h-[calc(100vh-5rem)] w-full flex-col border-t border-white/10 bg-[radial-gradient(circle_at_top,rgba(76,39,129,0.18),transparent_35%),linear-gradient(180deg,#090313_0%,#070211_100%)] px-5 pb-8 pt-8 sm:px-8 lg:px-12"
+        className="flex min-h-[calc(100vh-5rem)] w-full flex-col bg-[linear-gradient(180deg,#090313_0%,#070211_100%)] px-5 pb-8 pt-8 sm:px-8 lg:px-12"
       >
         <div className="relative flex flex-1 w-full items-center justify-center overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">

@@ -30,14 +30,15 @@ function Navbar() {
       <nav
         className={`mx-4 flex w-[calc(100%-2rem)] items-center justify-between rounded-full border px-5 py-3 transition duration-300 sm:mx-6 sm:w-[calc(100%-3rem)] lg:mx-8 lg:w-[calc(100%-4rem)] ${
           scrolled
-            ? 'border-white/10 bg-[#071521]/75 shadow-soft backdrop-blur-xl'
-            : 'border-white/8 bg-transparent'
+           ? 'border-white/10 bg-[rgba(9,19,29,0.42)] shadow-[0_18px_50px_rgba(0,0,0,0.18)] backdrop-blur-2xl'
+            : 'border-white/10 bg-[rgba(9,19,29,0.26)] backdrop-blur-2xl'
         }`}
       >
-        <Link to="/" className="font-display text-lg font-bold tracking-wide text-white">
-          Shamanth S. Kumbar
+         <Link to="/" className="rounded-full pr-4 text-white transition duration-300 hover:opacity-95">
+          <span className="font-display text-lg font-bold tracking-wide text-white">
+            Shamanth S. Kumbar
+          </span>
         </Link>
-
         <div className="hidden items-center gap-2 md:flex">
           {links.map((link) => (
             <Link
