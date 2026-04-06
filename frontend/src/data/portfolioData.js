@@ -9,7 +9,7 @@ const portfolioData = {
     location: 'Shivamogga, Karnataka',
     socials: [
       { label: 'Email', url: 'mailto:shamanthskumbar@gmail.com' },
-      { label: 'LinkedIn', url: '#' },
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/in/shamanth-s-kumbar/' },
       { label: 'Phone', url: 'tel:+916363868655' },
     ],
   },

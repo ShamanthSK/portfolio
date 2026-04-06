@@ -1,5 +1,5 @@
 const NVIDIA_API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
-const MODEL = 'nvidia/nvidia-nemotron';
+const MODEL = 'nvidia/nvidia-nemotron-nano-9b-v2';
 
 const buildSystemPrompt = (portfolioContext) => `
 You are an AI assistant for a personal portfolio website.
@@ -15,8 +15,8 @@ ${JSON.stringify(portfolioContext, null, 2)}
 async function askNvidiaAssistant({ message, portfolioContext }) {
   const apiKey = process.env.NVIDIA_API_KEY;
 
-  if (!apiKey) {
-    throw new Error('NVIDIA_API_KEY is missing in backend/.env');
+  if (!apiKey || apiKey === 'your_nvidia_api_key_here') {
+    throw new Error('Set a valid NVIDIA_API_KEY in backend/.env to enable the chatbot.');
   }
 
   const response = await fetch(NVIDIA_API_URL, {
@@ -42,10 +42,21 @@ async function askNvidiaAssistant({ message, portfolioContext }) {
     }),
   });
 
-  const data = await response.json();
+  const rawText = await response.text();
+  let data = null;
+
+  try {
+    data = rawText ? JSON.parse(rawText) : null;
+  } catch (_error) {
+    data = null;
+  }
 
   if (!response.ok) {
-    throw new Error(data?.error?.message || 'NVIDIA API request failed.');
+    throw new Error(
+      data?.error?.message ||
+        rawText ||
+        'NVIDIA API request failed.',
+    );
   }
 
   return (
