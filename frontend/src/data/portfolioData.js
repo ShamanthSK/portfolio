@@ -1,3 +1,5 @@
+import certificates from './certificates';
+
 const portfolioData = {
   personal: {
     name: 'Shamanth S. Kumbar',
@@ -100,6 +102,7 @@ const portfolioData = {
         'Worked on Python and Artificial Intelligence concepts for developing machine learning models, including data preprocessing, model evaluation, and applied deep learning to improve real-world solution performance.',
     },
   ],
+  certificates: certificates,
   achievements: [
     'NPTEL Certification on Cloud Computing from IIT Kanpur',
     'Deloitte Job Simulation Certificate in Technology, Data Analytics, and Cybersecurity',

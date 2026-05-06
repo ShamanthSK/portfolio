@@ -54,7 +54,7 @@ const certificates = [
     featured: false,
   },
   {
-    title: 'Cloud Computing',
+    title: 'Cloud Computing ',
     issuer: 'Cloud Computing Certification Program',
     year: '2024',
     image: '/certificates/thumbnails/cloud-computing.png',
@@ -99,7 +99,7 @@ const certificates = [
     featured: false,
   },
   {
-    title: 'Publication Finalpro Certificate',
+    title: 'Publication Kalakriti Certificate',
     issuer: 'Research Publication Program',
     year: '2024',
     image: '/certificates/thumbnails/publication-finalpro-certificate.png',
@@ -108,7 +108,7 @@ const certificates = [
     featured: false,
   },
   {
-    title: 'Publication Finalpro',
+    title: 'Publication Kalakriti',
     issuer: 'Research Journal Publication',
     year: '2024',
     image: '/certificates/thumbnails/publication-finalpro.png',
