@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Certifications from '../components/Certifications';
 import HeroSection from '../components/HeroSection';
 import ProjectCard from '../components/ProjectCard';
 import SkillCard from '../components/SkillCard';
@@ -92,6 +93,8 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <Certifications />
 
       <section id="experience" className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="w-full rounded-[2rem] border border-white/10 bg-white/4 p-8">
