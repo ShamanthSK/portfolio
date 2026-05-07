@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000/api' : '/api');
 
 export async function sendChatMessage(message, portfolioContext) {
   let response;
@@ -15,7 +15,10 @@ export async function sendChatMessage(message, portfolioContext) {
       }),
     });
   } catch (_error) {
-    throw new Error('Chatbot backend is not reachable. Make sure the backend is running on port 5000.');
+    const errorMsg = import.meta.env.DEV 
+      ? 'Chatbot backend is not reachable. Make sure the backend is running on port 5000.'
+      : 'Chatbot backend is currently unreachable. Please try again later.';
+    throw new Error(errorMsg);
   }
 
   const data = await response.json();
