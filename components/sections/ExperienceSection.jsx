@@ -1,5 +1,5 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import BorderGlow from '@/components/ui/BorderGlow';
 
@@ -66,9 +66,70 @@ const TIMELINE = [
   },
 ];
 
-function TimelineCard({ item, index }) {
+function TimelineCard({ item, index, isMobile }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
+
+  if (isMobile) {
+    return (
+      <div ref={ref} style={{
+        display: 'grid',
+        gridTemplateColumns: '48px 1fr',
+        alignItems: 'start',
+        gap: '1rem',
+        position: 'relative',
+        marginBottom: '1.5rem',
+      }}>
+        {/* Node column */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', height: '100%' }}>
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={inView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.2, type: 'spring', stiffness: 200 }}
+            style={{
+              width: 36, height: 36, borderRadius: '50%',
+              background: `linear-gradient(135deg, ${item.color}, ${item.color}99)`,
+              border: `3px solid ${item.color}50`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '1rem', zIndex: 1, position: 'relative',
+              boxShadow: `0 0 20px ${item.color}50, 0 0 40px ${item.color}25`,
+              flexShrink: 0,
+            }}
+          >
+            {item.icon}
+          </motion.div>
+          <div style={{
+            position: 'absolute',
+            top: 36, bottom: '-1.5rem',
+            width: 2,
+            background: `linear-gradient(180deg, ${item.color}60, rgba(255,255,255,0.05))`,
+            left: '50%', transform: 'translateX(-50%)',
+          }} />
+        </div>
+
+        {/* Card column */}
+        <div style={{ paddingBottom: '1.5rem' }}>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -3, transition: { duration: 0.25 } }}
+          >
+            <BorderGlow
+              backgroundColor="rgba(8,8,20,0.9)"
+              borderRadius={16}
+              glowRadius={30}
+              glowIntensity={1.1}
+              colors={['#7c3aed', '#2563eb', '#06b6d4']}
+              glowColor={item.color === '#7c3aed' ? '270 80 70' : item.color === '#2563eb' ? '220 90 60' : '190 90 55'}
+            >
+              <TimelineCardContent item={item} />
+            </BorderGlow>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={ref} style={{
@@ -178,6 +239,14 @@ export default function ExperienceSection() {
   const titleRef = useRef(null);
   const titleInView = useInView(titleRef, { once: true, margin: '-80px' });
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <section id="experience" className="section-base" style={{ background: 'linear-gradient(180deg, var(--space-dark) 0%, #060610 100%)' }}>
       <div className="stars-bg" />
@@ -199,7 +268,7 @@ export default function ExperienceSection() {
 
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           {TIMELINE.map((item, i) => (
-            <TimelineCard key={i} item={item} index={i} />
+            <TimelineCard key={i} item={item} index={i} isMobile={isMobile} />
           ))}
         </div>
       </div>
